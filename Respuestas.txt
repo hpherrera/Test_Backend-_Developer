@@ -1,0 +1,70 @@
+1.- a)Seleccionar todas las compras con sus detalles asociados. 
+    b) Seleccionar el precio total de las compras ordenado por categoría.
+
+    a) $compras = DB::table('compras')
+        ->join('detalle_compras', 'compras.id', '=', 'detalle_compras.Id_Compra');
+
+    b) $compras_por_categoria = DB::table('categorias')
+        ->join('detalle_compras', 'categoria.id' ,'=', 'detalle_compra.IdCategoria')
+        ->sum('detalle_compras.Precio');
+        
+
+2.- Explica la diferencia entre Composición y Herencia, incluyendo ejemplos de cuándo es más apropiado usar una o la otra.
+Composición es cuando una clase instanciada contiene una instalcia de otra clases para usar sus funcinalidades. 
+Se puede utilizar cuando existen relaciones  con 0 , 1 o N elementos del mismo tipo.
+Esto hace que la composision pueda modificar en tiempo de ejecución los estados de los objetos.
+
+Herencia es cuando un objeto o la clase pude basarse en otro objeto u clase. 
+Se puede utilizar cuando existe realaciones 1 a 1. 
+Esto ya que son clases relacionadas directamente y así solo modificar la subclase con nuevas funcionalidades.
+
+3.– Describe en detalle cómo Laravel usa el patrón de diseño MVC
+
+Modelo: El ORM Eloquent incluido con Laravel proporciona una implementació n
+de ActiveRecord simple para trabajar con su base de datos.
+Cada tabla de base de datos tiene un Modelo correspondiente que se utiliza
+para interactuar con esa tabla. Los modelos le permiten consultar datos en sus
+tablas, así como insertar nuevos registros en la tabla.
+
+Vista: Blade es el motor de creación de plantillas simple pero potente proporcionado
+con Laravel. A diferencia de otros motores de plantillas de PHP, Blade
+no le impide usar código PHP simple en sus vistas; esto hace que el código sea
+más limpio. De hecho, todas las vistas de Blade se compilan en código PHP
+simple y se almacenan en la memoria caché hasta que se modifiquen, lo que
+significa que Blade agrega esencialmente una sobrecarga a su aplicación. Los archivos
+de Blade View usan la extensión de archivo y típicamente se almacenan
+en el directorio propio para las vistas.
+
+Controlador: Los controladores son un mecanismo que nos permite agrupar
+la lógica de peticiones HTTP relacionadas y de esta forma organizar mejor
+nuestro código. Laravel maneja los controladores en un directorio.
+
+4.- Utilizando Laravel, se requiere crear las rutas para un sistema que muestra películas de distinto género.
+Con la base /pelicula/, crea una ruta que dirija a una acción por cada género (entregado como parámetro) en el controlador. 
+Los géneros válidos son Drama, Comedia, Acción y Terror. Cualquier otro género debe devolver error 404.
+
+http://localhost:8000/peliculas/Tereror/info 
+
+5.- Cuáles son las ventajas y desventajas de usar el patrón de diseño Active Record en la capa de Modelo?
+
+Ventajas:
+se Centraliza el acceso a la base de datos.
+no se duplica código.
+
+desventajas:
+No se pueden realizar pruebas unitarias.
+Si existe un cambio en el esquema este debe ser en todo los lados que se utliza.
+
+6.- Comandos necesarios para crear un controlador en Laravel, como correr un seeder en PHP.
+     que diferencia existe en el objeto extraído con el método find o All.
+
+Comando: artisan make:controller <nombre_controlador>
+
+Seeder: php artisan make:seeder UsersTableSeeder
+
+        php artisan db:seed
+
+        php artisan db:seed --class=UsersTableSeeder
+
+método find: busca y encuentra las tuplas requeridas. 
+método All: extrae todas las tuplas de la base de datos.
